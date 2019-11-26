@@ -205,9 +205,10 @@ class EmailReply extends App.Controller
 
     date = @date_format(article.created_at)
     name = article.updated_by.displayName()
-    from_email = article.updated_by.displayName()
-    to_email = article.updated_by.displayName()
-    forward_header = App.i18n.translateInline('On %s, %s wrote:', date, name) + '<br><br>' + "FROM: #{from_email} <br><br>" + "TO #{to_email} <br><br>"
+    from_email = article.from()
+    to_email = article.to()
+    cc_email = article.cc()
+    forward_header = App.i18n.translateInline('On %s, %s wrote:', date, name) + '<br><br>' + "FROM: #{from_email} <br>" + "TO #{to_email} <br>" + "CC #{to_email} <br>"
     body = "<br/><div>---Begin forwarded message:---<br/><br/>#{forward_header}</div><div><blockquote type=\"cite\">#{body}</blockquote></div><div><br></div>"
 
     articleNew = {}
